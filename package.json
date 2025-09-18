@@ -1,0 +1,35 @@
+{
+  "name": "md_editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx http-server -p 8080 -o",
+    "build": "npx esbuild main.js --bundle --outfile=main.bundle.js --format=iife --global-name=MarkdownEditor --loader:.css=text"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@codemirror/lang-markdown": "^6.3.4",
+    "@codemirror/theme-one-dark": "^6.1.3",
+    "@milkdown/core": "^7.15.5",
+    "@milkdown/crepe": "^7.15.5",
+    "@milkdown/ctx": "^7.15.5",
+    "@milkdown/plugin-block": "^7.15.5",
+    "@milkdown/plugin-history": "^7.15.5",
+    "@milkdown/plugin-listener": "^7.15.5",
+    "@milkdown/plugin-slash": "^7.15.5",
+    "@milkdown/plugin-tooltip": "^7.15.5",
+    "@milkdown/preset-commonmark": "^7.15.5",
+    "@milkdown/preset-gfm": "^7.15.5",
+    "@milkdown/theme-nord": "^7.15.5",
+    "codemirror": "^6.0.2",
+    "vue": "^3.5.21"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.10"
+  }
+}

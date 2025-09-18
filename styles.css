@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background: #1e1e1e;
+}
+
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: #2d2d2d;
+    border-bottom: 1px solid #444;
+    gap: 10px;
+}
+
+.toolbar-btn {
+    padding: 6px 12px;
+    background: #3a3a3a;
+    color: #d4d4d4;
+    border: 1px solid #555;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toolbar-btn:hover {
+    background: #4a4a4a;
+}
+
+.toolbar-btn.active {
+    background: #0e639c;
+    color: white;
+    border-color: #1177bb;
+}
+
+.status-bar {
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+    color: #999;
+    font-size: 14px;
+}
+
+#sync-status {
+    padding: 4px 8px;
+    background: #2a2a2a;
+    border-radius: 4px;
+}
+
+#sync-status.syncing {
+    background: #4a4a1a;
+    color: #ffcc00;
+}
+
+.editor-panes {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.editor-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    background: #1e1e1e;
+}
+
+.editor-pane.hidden {
+    display: none;
+}
+
+.pane-header {
+    padding: 10px 20px;
+    background: #2d2d2d;
+    color: #d4d4d4;
+    border-bottom: 1px solid #444;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#codemirror-editor,
+#milkdown-editor {
+    flex: 1;
+    overflow: auto;
+    background: #1e1e1e;
+}
+
+.pane-divider {
+    width: 4px;
+    background: #444;
+    cursor: col-resize;
+    position: relative;
+    transition: background 0.2s;
+}
+
+.pane-divider:hover {
+    background: #0e639c;
+}
+
+.pane-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 30px;
+    background: #666;
+    border-radius: 2px;
+}
+
+/* CodeMirror specific styles */
+.cm-editor {
+    height: 100%;
+    font-size: 14px;
+}
+
+.cm-editor .cm-scroller {
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+}
+
+/* Milkdown/Crepe specific styles */
+#milkdown-editor {
+    height: 100%;
+    overflow: auto;
+    position: relative;
+}
+
+#milkdown-editor .crepe {
+    height: 100%;
+    min-height: 100%;
+}
+
+#milkdown-editor .crepe-editor {
+    height: 100%;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#milkdown-editor .ProseMirror {
+    padding: 20px;
+    outline: none;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #d4d4d4;
+    min-height: 100%;
+}
+
+/* Crepe toolbar styles */
+.crepe-toolbar,
+.crepe-block-handle,
+.crepe-slash-menu {
+    z-index: 1000;
+}
+
+/* Ensure tooltips and menus appear above other content */
+.crepe-tooltip,
+.floating-ui {
+    z-index: 1001;
+}
+
+/* Style adjustments for dark theme */
+.crepe .milkdown-menu,
+.crepe .milkdown-tooltip {
+    background: #2d2d2d;
+    border: 1px solid #444;
+    color: #d4d4d4;
+}
+
+.crepe .milkdown-menu-item:hover,
+.crepe .milkdown-tooltip-item:hover {
+    background: #3a3a3a;
+}
+
+#milkdown-editor .ProseMirror h1,
+#milkdown-editor .ProseMirror h2,
+#milkdown-editor .ProseMirror h3,
+#milkdown-editor .ProseMirror h4,
+#milkdown-editor .ProseMirror h5,
+#milkdown-editor .ProseMirror h6 {
+    margin: 1em 0 0.5em;
+    font-weight: 600;
+}
+
+#milkdown-editor .ProseMirror h1 { font-size: 2em; }
+#milkdown-editor .ProseMirror h2 { font-size: 1.5em; }
+#milkdown-editor .ProseMirror h3 { font-size: 1.25em; }
+
+#milkdown-editor .ProseMirror p {
+    margin: 0.5em 0;
+}
+
+#milkdown-editor .ProseMirror code {
+    background: #2d2d2d;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+}
+
+#milkdown-editor .ProseMirror pre {
+    background: #2d2d2d;
+    padding: 12px;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 1em 0;
+}
+
+#milkdown-editor .ProseMirror blockquote {
+    border-left: 4px solid #4a4a4a;
+    padding-left: 16px;
+    margin: 1em 0;
+    color: #999;
+}
+
+#milkdown-editor .ProseMirror ul,
+#milkdown-editor .ProseMirror ol {
+    margin: 0.5em 0;
+    padding-left: 24px;
+}
+
+#milkdown-editor .ProseMirror a {
+    color: #4fc1ff;
+    text-decoration: none;
+}
+
+#milkdown-editor .ProseMirror a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .editor-panes {
+        flex-direction: column;
+    }
+
+    .pane-divider {
+        width: 100%;
+        height: 4px;
+        cursor: row-resize;
+    }
+
+    .pane-divider::before {
+        width: 30px;
+        height: 2px;
+    }
+}

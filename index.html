@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual-Pane Markdown Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="editor-container">
+        <div class="toolbar">
+            <button id="toggle-codemirror" class="toolbar-btn">CodeMirror</button>
+            <button id="toggle-milkdown" class="toolbar-btn">Milkdown</button>
+            <button id="toggle-both" class="toolbar-btn active">Both</button>
+            <span class="status-bar">
+                <span id="sync-status">Ready</span>
+                <span id="word-count">Words: 0</span>
+            </span>
+        </div>
+        <div class="editor-panes">
+            <div id="codemirror-pane" class="editor-pane">
+                <div class="pane-header">CodeMirror (Source)</div>
+                <div id="codemirror-editor"></div>
+            </div>
+            <div id="divider" class="pane-divider"></div>
+            <div id="milkdown-pane" class="editor-pane">
+                <div class="pane-header">Milkdown (Rich View)</div>
+                <div id="milkdown-editor"></div>
+            </div>
+        </div>
+    </div>
+    <script src="main.bundle.js"></script>
+</body>
+</html>

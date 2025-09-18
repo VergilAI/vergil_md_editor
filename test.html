@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milkdown Editor Test</title>
+    <link rel="stylesheet" href="node_modules/@milkdown/crepe/lib/theme/common/style.css">
+    <link rel="stylesheet" href="node_modules/@milkdown/crepe/lib/theme/frame/style.css">
+    <style>
+        #app {
+            min-height: 400px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px;
+        }
+        .loading {
+            color: #666;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Milkdown Editor Test</h1>
+    <div id="app" class="loading">Loading editor...</div>
+    <script>
+        console.log('Script loaded!');
+        
+        // Add error handler
+        window.addEventListener('error', function(e) {
+            console.error('Error:', e.error);
+            document.getElementById('app').innerHTML = '<p style="color: red;">Error loading editor: ' + e.error.message + '</p>';
+        });
+    </script>
+    <script src="main.bundle.js"></script>
+    <script>
+        // Check if the editor loaded
+        setTimeout(() => {
+            const app = document.getElementById('app');
+            if (app.innerHTML === 'Loading editor...') {
+                app.innerHTML = '<p style="color: orange;">Editor initialization may have failed. Check console for errors.</p>';
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
