@@ -6,9 +6,10 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #1e1e1e;
+    color: #d4d4d4;
     height: 100vh;
     overflow: hidden;
-    background: #1e1e1e;
 }
 
 .editor-container {
@@ -17,59 +18,49 @@ body {
     height: 100vh;
 }
 
-.toolbar {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
+.editor-header {
     background: #2d2d2d;
-    border-bottom: 1px solid #444;
-    gap: 10px;
+    padding: 1rem;
+    border-bottom: 1px solid #3e3e3e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.toolbar-btn {
-    padding: 6px 12px;
-    background: #3a3a3a;
-    color: #d4d4d4;
-    border: 1px solid #555;
+.editor-header h1 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.toolbar {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn {
+    background: #3c3c3c;
+    color: #cccccc;
+    border: 1px solid #4a4a4a;
+    padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 0.875rem;
     transition: all 0.2s;
 }
 
-.toolbar-btn:hover {
+.btn:hover {
     background: #4a4a4a;
+    color: #ffffff;
 }
 
-.toolbar-btn.active {
-    background: #0e639c;
-    color: white;
-    border-color: #1177bb;
+.btn:active {
+    background: #525252;
 }
 
-.status-bar {
-    margin-left: auto;
-    display: flex;
-    gap: 20px;
-    color: #999;
-    font-size: 14px;
-}
-
-#sync-status {
-    padding: 4px 8px;
-    background: #2a2a2a;
-    border-radius: 4px;
-}
-
-#sync-status.syncing {
-    background: #4a4a1a;
-    color: #ffcc00;
-}
-
-.editor-panes {
+.editor-body {
     display: flex;
     flex: 1;
     overflow: hidden;
-    position: relative;
 }
 
 .editor-pane {
@@ -77,20 +68,49 @@ body {
     display: flex;
     flex-direction: column;
     min-width: 200px;
-    background: #1e1e1e;
+    overflow: hidden;
 }
 
 .editor-pane.hidden {
     display: none;
 }
 
+.editor-pane.fullwidth {
+    flex: 1;
+    width: 100%;
+}
+
 .pane-header {
-    padding: 10px 20px;
     background: #2d2d2d;
-    color: #d4d4d4;
-    border-bottom: 1px solid #444;
-    font-size: 14px;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #3e3e3e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pane-header h3 {
+    font-size: 0.875rem;
     font-weight: 500;
+    color: #cccccc;
+}
+
+.sync-status {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: #1e3a1e;
+    color: #4ade80;
+    border-radius: 3px;
+}
+
+.sync-status.syncing {
+    background: #3a3a1e;
+    color: #fbbf24;
+}
+
+.sync-status.error {
+    background: #3a1e1e;
+    color: #f87171;
 }
 
 #codemirror-editor,
@@ -100,164 +120,139 @@ body {
     background: #1e1e1e;
 }
 
+#codemirror-editor .cm-editor {
+    height: 100%;
+}
+
+#milkdown-editor {
+    background: #ffffff;
+    color: #000000;
+    height: 100%;
+    overflow: auto;
+}
+
+#milkdown-editor .milkdown {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    min-height: 100%;
+}
+
+#milkdown-editor .editor {
+    min-height: 100%;
+}
+
 .pane-divider {
     width: 4px;
-    background: #444;
+    background: #3e3e3e;
     cursor: col-resize;
     position: relative;
     transition: background 0.2s;
 }
 
 .pane-divider:hover {
-    background: #0e639c;
+    background: #4a4a4a;
 }
 
-.pane-divider::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 2px;
-    height: 30px;
-    background: #666;
-    border-radius: 2px;
+.pane-divider:active {
+    background: #525252;
 }
 
-/* CodeMirror specific styles */
-.cm-editor {
-    height: 100%;
-    font-size: 14px;
-}
-
-.cm-editor .cm-scroller {
-    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
-}
-
-/* Milkdown/Crepe specific styles */
-#milkdown-editor {
-    height: 100%;
-    overflow: auto;
-    position: relative;
-}
-
-#milkdown-editor .crepe {
-    height: 100%;
-    min-height: 100%;
-}
-
-#milkdown-editor .crepe-editor {
-    height: 100%;
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-#milkdown-editor .ProseMirror {
-    padding: 20px;
-    outline: none;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #d4d4d4;
-    min-height: 100%;
-}
-
-/* Crepe toolbar styles */
-.crepe-toolbar,
-.crepe-block-handle,
-.crepe-slash-menu {
-    z-index: 1000;
-}
-
-/* Ensure tooltips and menus appear above other content */
-.crepe-tooltip,
-.floating-ui {
-    z-index: 1001;
-}
-
-/* Style adjustments for dark theme */
-.crepe .milkdown-menu,
-.crepe .milkdown-tooltip {
+.editor-footer {
     background: #2d2d2d;
-    border: 1px solid #444;
-    color: #d4d4d4;
+    border-top: 1px solid #3e3e3e;
+    padding: 0.5rem 1rem;
 }
 
-.crepe .milkdown-menu-item:hover,
-.crepe .milkdown-tooltip-item:hover {
-    background: #3a3a3a;
+.status-bar {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.75rem;
+    color: #969696;
 }
 
-#milkdown-editor .ProseMirror h1,
-#milkdown-editor .ProseMirror h2,
-#milkdown-editor .ProseMirror h3,
-#milkdown-editor .ProseMirror h4,
-#milkdown-editor .ProseMirror h5,
-#milkdown-editor .ProseMirror h6 {
-    margin: 1em 0 0.5em;
-    font-weight: 600;
+.status-bar span {
+    display: flex;
+    align-items: center;
 }
 
-#milkdown-editor .ProseMirror h1 { font-size: 2em; }
-#milkdown-editor .ProseMirror h2 { font-size: 1.5em; }
-#milkdown-editor .ProseMirror h3 { font-size: 1.25em; }
-
-#milkdown-editor .ProseMirror p {
-    margin: 0.5em 0;
-}
-
-#milkdown-editor .ProseMirror code {
-    background: #2d2d2d;
-    padding: 2px 4px;
+#sync-indicator {
+    margin-left: auto;
+    padding: 0.125rem 0.5rem;
+    background: #1e3a1e;
+    color: #4ade80;
     border-radius: 3px;
-    font-family: 'Fira Code', 'Consolas', monospace;
-    font-size: 0.9em;
 }
 
-#milkdown-editor .ProseMirror pre {
-    background: #2d2d2d;
-    padding: 12px;
+#sync-indicator.syncing {
+    background: #3a3a1e;
+    color: #fbbf24;
+    animation: pulse 1s infinite;
+}
+
+#sync-indicator.error {
+    background: #3a1e1e;
+    color: #f87171;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Milkdown specific styles */
+.milkdown-menu {
+    background: #2d2d2d !important;
+    border: 1px solid #3e3e3e !important;
+}
+
+.milkdown .editor {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    line-height: 1.6;
+}
+
+.milkdown h1,
+.milkdown h2,
+.milkdown h3,
+.milkdown h4,
+.milkdown h5,
+.milkdown h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.milkdown p {
+    margin-bottom: 1em;
+}
+
+.milkdown code {
+    background: #f3f4f6;
+    padding: 0.125rem 0.25rem;
+    border-radius: 3px;
+    font-size: 0.875em;
+}
+
+.milkdown pre {
+    background: #f3f4f6;
+    padding: 1rem;
     border-radius: 4px;
     overflow-x: auto;
     margin: 1em 0;
 }
 
-#milkdown-editor .ProseMirror blockquote {
-    border-left: 4px solid #4a4a4a;
-    padding-left: 16px;
+.milkdown blockquote {
+    border-left: 4px solid #e5e7eb;
+    padding-left: 1rem;
     margin: 1em 0;
-    color: #999;
+    color: #6b7280;
 }
 
-#milkdown-editor .ProseMirror ul,
-#milkdown-editor .ProseMirror ol {
-    margin: 0.5em 0;
-    padding-left: 24px;
+.milkdown ul,
+.milkdown ol {
+    margin: 1em 0;
+    padding-left: 2rem;
 }
 
-#milkdown-editor .ProseMirror a {
-    color: #4fc1ff;
-    text-decoration: none;
-}
-
-#milkdown-editor .ProseMirror a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .editor-panes {
-        flex-direction: column;
-    }
-
-    .pane-divider {
-        width: 100%;
-        height: 4px;
-        cursor: row-resize;
-    }
-
-    .pane-divider::before {
-        width: 30px;
-        height: 2px;
-    }
+.milkdown li {
+    margin: 0.25em 0;
 }

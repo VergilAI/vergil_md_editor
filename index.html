@@ -8,27 +8,46 @@
 </head>
 <body>
     <div class="editor-container">
-        <div class="toolbar">
-            <button id="toggle-codemirror" class="toolbar-btn">CodeMirror</button>
-            <button id="toggle-milkdown" class="toolbar-btn">Milkdown</button>
-            <button id="toggle-both" class="toolbar-btn active">Both</button>
-            <span class="status-bar">
-                <span id="sync-status">Ready</span>
-                <span id="word-count">Words: 0</span>
-            </span>
+        <div class="editor-header">
+            <h1>Markdown Editor</h1>
+            <div class="toolbar">
+                <button id="toggle-codemirror" class="btn">Toggle Source</button>
+                <button id="toggle-milkdown" class="btn">Toggle Preview</button>
+                <button id="fullwidth-codemirror" class="btn">Source Only</button>
+                <button id="fullwidth-milkdown" class="btn">Preview Only</button>
+            </div>
         </div>
-        <div class="editor-panes">
-            <div id="codemirror-pane" class="editor-pane">
-                <div class="pane-header">CodeMirror (Source)</div>
+
+        <div class="editor-body">
+            <div class="editor-pane" id="codemirror-pane">
+                <div class="pane-header">
+                    <h3>Source (CodeMirror)</h3>
+                    <span class="sync-status" id="codemirror-status">Ready</span>
+                </div>
                 <div id="codemirror-editor"></div>
             </div>
-            <div id="divider" class="pane-divider"></div>
-            <div id="milkdown-pane" class="editor-pane">
-                <div class="pane-header">Milkdown (Rich View)</div>
+
+            <div class="pane-divider" id="divider"></div>
+
+            <div class="editor-pane" id="milkdown-pane">
+                <div class="pane-header">
+                    <h3>Preview (Milkdown)</h3>
+                    <span class="sync-status" id="milkdown-status">Ready</span>
+                </div>
                 <div id="milkdown-editor"></div>
             </div>
         </div>
+
+        <div class="editor-footer">
+            <div class="status-bar">
+                <span id="word-count">Words: 0</span>
+                <span id="char-count">Characters: 0</span>
+                <span id="cursor-position">Line: 1, Col: 1</span>
+                <span id="sync-indicator">Synced</span>
+            </div>
+        </div>
     </div>
+
     <script src="main.bundle.js"></script>
 </body>
 </html>
